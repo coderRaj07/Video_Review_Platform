@@ -1,6 +1,6 @@
 const express = require('express');
-const Organization = require('../models/Organization');
-const OrganizationMember = require('../models/OrganizationMember');
+const Organization = require('../models/Organization.schema');
+const OrganizationMember = require('../models/OrganizationMember.schema');
 const auth = require('../middleware/auth');
 const router = express.Router();
 
