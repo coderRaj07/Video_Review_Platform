@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Organization = require('./models/Organization'); 
+const Organization = require('./Organization.schema'); 
 
 const videoSchema = new Schema({
   organizationId: { type: Schema.Types.ObjectId, ref: 'Organization', required: true },

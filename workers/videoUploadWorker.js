@@ -1,8 +1,8 @@
 const videoUploadQueue = require('../queues/videoUploadQueue');
 const AWS = require('aws-sdk');
 const fs = require('fs');
-const Video = require('../models/Video');
-const Organization = require('../models/Organization');
+const Video = require('../models/Video.schema');
+const Organization = require('../models/Organization.schema');
 const s3 = new AWS.S3({
   accessKeyId: 'YOUR_AWS_ACCESS_KEY',
   secretAccessKey: 'YOUR_AWS_SECRET_KEY',

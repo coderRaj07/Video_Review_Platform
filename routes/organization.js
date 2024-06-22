@@ -36,4 +36,13 @@ router.get('/:orgId', auth, async (req, res) => {
   res.send(organization);
 });
 
+
+router.post('/join-requests/:orgId',auth, async (req, res) => {
+  userToJoinOrg = req.headers.user
+})
+
+router.get("/",auth, async (req, res) =>{
+  res.send(req.headers)
+})
+
 module.exports = router;
