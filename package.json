@@ -16,6 +16,10 @@
     "bcryptjs": "^2.4.3",
     "bull": "^4.13.1",
     "fs": "^0.0.1-security",
+<<<<<<< HEAD
+=======
+    "uuid": "^10.0.0",
+>>>>>>> f94512e (feat: joi and lodash added)
     "joi": "^17.13.3",
     "lodash": "^4.17.21",
     "mongoose": "^8.4.3",
