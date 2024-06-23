@@ -26,4 +26,80 @@ router.get('/me', auth, async (req, res) => {
   res.send(req.user);
 });
 
+//User wanting to join organisation
+// User selects organisations from getAllOrganisations()
+// It's Id getting added to this route
+router.post('/join-requests/:orgId', auth, async (req, res) => {
+  try {
+    //validate orgId exists
+    const orgObjectId = Types.ObjectId.createFromHexString(req.params.orgId)
+    const org = await Organization.findById({ orgId: orgObjectId })
+    if (!org) {
+      return res.status(400).send({ error: "Organization not found" })
+    }
+    const orgId = orgObjectId
+    const userToJoinOrg = req.user._id
+    const requestedBy = userToJoinOrg
+    const status = 'pending'
+    const joinRequestSchema = await JoinRequest.create({ orgId, userToJoinOrg, requestedBy, status })
+    return res.status(201).send(joinRequestSchema)
+  }
+  catch (error) {
+    return res.status(500).send({ error: "Internal server error" });
+  }
+}
+
+)
+
+
+
+// user wants to check which orgs he has applied
+router.get("/applied-orgs/", auth, async (req, res) => {
+  try {
+    // const orgObjectId = Types.ObjectId.createFromHexString(req.params.orgId);
+    const sentByOrg = req.query.sentByOrg === "true";
+    const sentByUser = req.query.sentByUser === "true";
+    const userId = req.user._id
+
+    // Validate orgId exists
+    // const org = await Organization.findById(orgObjectId).lean();
+    // if (!org) {
+    //   return res.status(400).send({ error: "Organization not found" });
+    // }
+
+    // if (req.user._id.toString() !== org.orgOwner.toString()) {
+    //   return res.status(401).send({ error: "You are not the owner of this organization" });
+    // }
+
+    // Create a query filter
+    const queryFilter = {};
+    if (sentByOrg) {
+      set(queryFilter, "requestedBy.$ne", userId);
+    }
+    if (sentByUser) {
+      set(queryFilter, "requestedBy", userId);
+    }
+    if (sentByOrg && sentByUser) {
+      queryFilter = {};
+    }
+
+    // Validate query parameters using Joi
+    const querySchema = Joi.object({
+      sentByOrg: Joi.boolean(),
+      sentByUser: Joi.boolean(),
+    });
+    const { error } = querySchema.validate(req.query);
+    if (error) {
+      return res.status(400).send({ error: error.details[0].message });
+    }
+
+    const joinRequests = await JoinRequest.find(queryFilter).lean();
+    const usersToJoinOrg = joinRequests.map((joinee) => joinee.userToJoinOrg);
+    return res.status(200).json({ usersToJoinOrg });
+  }
+  catch (error) {
+    return res.status(500).send({ error: "Internal server error" });
+  }
+});
+
 module.exports = router;
