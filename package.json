@@ -4,13 +4,19 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1642.0",
     "bcryptjs": "^2.4.3",
-    "fs": "^0.0.1-security"
+    "bull": "^4.13.1",
+    "fs": "^0.0.1-security",
+    "joi": "^17.13.3",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.4.3",
+    "nodemon": "^3.1.4"
   }
 }

@@ -3,8 +3,8 @@ const multer = require('multer');
 const fs = require('fs');
 const videoUploadQueue = require('../queues/videoUploadQueue');
 const auth = require('../middleware/auth');
-const Organization = require('../models/Organization');
-const Video = require('../models/Video');
+const Organization = require('../models/Organization.schema');
+const Video = require('../models/Video.schema');
 const router = express.Router();
 
 const upload = multer({ dest: 'uploads/' });

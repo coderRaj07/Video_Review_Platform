@@ -6,7 +6,7 @@ const videoRouter = require('./routes/video');
 const videoUploadWorker = require('./worker');
 const app = express();
 app.use(express.json());
-mongoose.connect('mongodb://localhost/yourdbname', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/vdo_collab');
 app.use('/users', userRouter);
 app.use('/organizations', organizationRouter);
 app.use('/videos', videoRouter);
