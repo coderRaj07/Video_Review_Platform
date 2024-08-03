@@ -9,8 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.623.0",
+    "@aws-sdk/s3-presigned-post": "^3.623.0",
     "aws-sdk": "^2.1642.0",
     "bcryptjs": "^2.4.3",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "uuid": "^10.0.0"
   }
 }
